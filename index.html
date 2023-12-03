@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    body {
+      font-family: 'Arial', sans-serif;
+      margin: 0;
+      background-color: #f5f5f5;
+      color: #333;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+      transition: background-color 0.5s ease, color 0.5s ease;
+    }
+
+    .sensor-container {
+      text-align: center;
+      background-color: #fff;
+      color: #333;
+      padding: 20px;
+      border-radius: 8px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+      transition: background-color 0.5s ease, color 0.5s ease;
+    }
+
+    h1 {
+      color: #3498db;
+    }
+
+    .sensor-group {
+      margin-top: 20px;
+    }
+
+    .sensor-value {
+      font-size: 18px;
+      margin-bottom: 10px;
+    }
+
+    .sensor-label {
+      font-size: 14px;
+      color: #7f8c8d;
+    }
+
+    button {
+      padding: 10px;
+      margin-top: 20px;
+      cursor: pointer;
+      background-color: #3498db;
+      color: white;
+      border: none;
+      border-radius: 4px;
+      transition: background-color 0.3s ease, color 0.3s ease;
+    }
+
+    button:hover {
+      background-color: #2980b9;
+    }
+
+    /* Night mode styles */
+    .night-mode body {
+      background-color: #2c3e50;
+      color: white;
+    }
+
+    .night-mode .sensor-container {
+      background-color: #34495e;
+      color: #ecf0f1; /* Adjusted text color in dark mode */
+    }
+
+    .night-mode .sensor-value,
+    .night-mode .sensor-label {
+      color: #ecf0f1; /* Adjusted text color in dark mode */
+    }
+  </style>
+  <script>
+    // Simulated sensor data
+    let temperatureDHT11 = 25.0;
+    let humidityDHT11 = 50.0;
+
+    let temperatureBMP180 = 22.5;
+    let pressureBMP180 = 1010.0;
+
+    let gasMQ1 = 300;
+    let gasMQ2 = 400;
+    let gasMQ3 = 200;
+    let gasMQ4 = 500;
+    let gasMQ5 = 350;
+    let gasMQ6 = 250;
+    let gasMQ7 = 450;
+
+    function updateSensorData() {
+      // Simulate data changes
+      temperatureDHT11 = getRandomNumber(20, 30);
+      humidityDHT11 = getRandomNumber(40, 60);
+
+      temperatureBMP180 = getRandomNumber(20, 25);
+      pressureBMP180 = getRandomNumber(1005, 1015);
+
+      gasMQ1 = getRandomNumber(200, 500);
+      gasMQ2 = getRandomNumber(300, 700);
+      gasMQ3 = getRandomNumber(150, 300);
+      gasMQ4 = getRandomNumber(400, 600);
+      gasMQ5 = getRandomNumber(300, 450);
+      gasMQ6 = getRandomNumber(200, 300);
+      gasMQ7 = getRandomNumber(400, 550);
+
+      // Update HTML elements with simulated sensor data
+      document.getElementById('temperature-dht11').innerText = temperatureDHT11.toFixed(1) + " °C";
+      document.getElementById('humidity-dht11').innerText = humidityDHT11.toFixed(1) + " %";
+
+      document.getElementById('temperature-bmp180').innerText = temperatureBMP180.toFixed(1) + " °C";
+      document.getElementById('pressure-bmp180').innerText = pressureBMP180.toFixed(1) + " hPa";
+
+      document.getElementById('gas-mq1').innerText = gasMQ1.toFixed(1);
+      document.getElementById('gas-mq2').innerText = gasMQ2.toFixed(1);
+      document.getElementById('gas-mq3').innerText = gasMQ3.toFixed(1);
+      document.getElementById('gas-mq4').innerText = gasMQ4.toFixed(1);
+      document.getElementById('gas-mq5').innerText = gasMQ5.toFixed(1);
+      document.getElementById('gas-mq6').innerText = gasMQ6.toFixed(1);
+      document.getElementById('gas-mq7').innerText = gasMQ7.toFixed(1);
+    }
+
+    function getRandomNumber(min, max) {
+      return Math.random() * (max - min) + min;
+    }
+
+    function toggleNightMode() {
+      document.body.classList.toggle('night-mode');
+    }
+
+    // Update sensor data every 3 seconds (adjust the interval as needed)
+    setInterval(updateSensorData, 3000);
+
+    // Initial data update
+    updateSensorData();
+  </script>
+</head>
+<body>
+  <div class="sensor-container">
+    <h1>Sensor Data</h1>
+
+    <div class="sensor-group">
+      <div class="sensor-value">
+        DHT11 Sensor Data:
+      </div>
+      <div class="sensor-value" id="temperature-dht11">--</div>
+      <div class="sensor-value" id="humidity-dht11">--</div>
+    </div>
+
+    <div class="sensor-group">
+      <div class="sensor-value">
+        BMP180 Sensor Data:
+      </div>
+      <div class="sensor-value" id="temperature-bmp180">--</div>
+      <div class="sensor-value" id="pressure-bmp180">--</div>
+    </div>
+
+    <div class="sensor-group">
+      <div class="sensor-value">
+        Gas Sensor Data:
+      </div>
+      <div class="sensor-label">MQ1:</div>
+      <div class="sensor-value" id="gas-mq1">--</div>
+      <div class="sensor-label">MQ2:</div>
+      <div class="sensor-value" id="gas-mq2">--</div>
+      <div class="sensor-label">MQ3:</div>
+      <div class="sensor-value" id="gas-mq3">--</div>
+      <div class="sensor-label">MQ4:</div>
+      <div class="sensor-value" id="gas-mq4">--</div>
+      <div class="sensor-label">MQ5:</div>
+      <div class="sensor-value" id="gas-mq5">--</div>
+      <div class="sensor-label">MQ6:</div>
+      <div class="sensor-value" id="gas-mq6">--</div>
+      <div class="sensor-label">MQ7:</div>
+      <div class="sensor-value" id="gas-mq7">--</div>
+    </div>
+
+    <button onclick="updateSensorData()">Update Data</button>
+    <button onclick="toggleNightMode()">Toggle Night Mode</button>
+  </div>
+</body>
+</html>
